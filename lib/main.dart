@@ -34,38 +34,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: new Center(child: FutureBuilder<VideoResponse>(
-        future: fetchYoutubeVideo(""),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return VideoList(snapshot.data.items);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return CircularProgressIndicator();
-        },
-      )),
-      /*floatingActionButton: new FloatingActionButton(
-        *//*onPressed: _incrementCounter,*//*
-        tooltip: 'Refresh',
-        child: new Icon(Icons.refresh),
-      ),*/ // This trailing comma makes auto-formatting nicer for build methods.
+      body: new Center(
+          child: FutureBuilder<VideoResponse>(
+            future: fetchYoutubeVideo(""),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return VideoList(snapshot.data.items);
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return CircularProgressIndicator();
+              },
+          )
+      ),
     );
   }
 }
 
 Future<VideoResponse> fetchYoutubeVideo(String pageToken) async {
-  final String url =
-      "https://www.googleapis.com/youtube/v3/search?key=AIzaSyD6w87SYBHtHUq8y2eyTOHBdLXH28RNWvA&"
-      "part=snippet&q=kuma+popular+song&chart=mostRecent&maxResults=50&pageToken=$pageToken"
-      "";
+  final String url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyD6w87SYBHtHUq8y2eyTOHBdLXH28RNWvA&part=snippet&q=kuma+popular+song&chart=mostRecent&maxResults=50&pageToken=$pageToken";
   final response = await http.get(url);
 
   if (response.statusCode == 200) {

@@ -22,16 +22,11 @@ class VideoList extends StatelessWidget {
         children: <Widget>[
           new Container(
             margin: EdgeInsets.all(8.0),
-            child: new Image.network(
-                videos[index].snippet.thumbnails.medium.url,
-                height: 210.0,
-                fit: BoxFit.cover),
+            child: new Image.network(videos[index].snippet.thumbnails.medium.url, height: 210.0, fit: BoxFit.cover),
           ),
           new Container(
             margin: EdgeInsets.only(left:8.0,right: 8.0,bottom: 8.0),
-            child: new Text(
-              videos[index].snippet.title,
-            ),
+            child: new Text(videos[index].snippet.title),
           )
         ],
       ),

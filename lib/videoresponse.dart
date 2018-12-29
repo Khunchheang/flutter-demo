@@ -6,27 +6,14 @@ class VideoResponse {
   String etag;
   List<ItemsItem> items;
 
-  VideoResponse(
-      {this.regionCode,
-      this.kind,
-      this.nextPageToken,
-      this.pageInfo,
-      this.etag,
-      this.items});
+  VideoResponse({this.regionCode, this.kind, this.nextPageToken, this.pageInfo, this.etag, this.items});
 
   factory VideoResponse.fromJson(Map<String, dynamic> youtubeJson) {
     PageInfo pageInfo = PageInfo.fromJson(youtubeJson['pageInfo']);
     var list = youtubeJson['items'] as List;
     List<ItemsItem> items = list.map((i) => ItemsItem.fromJson(i)).toList();
 
-    return VideoResponse(
-      pageInfo: pageInfo,
-      items: items,
-      regionCode: youtubeJson['regionCode'],
-      kind: youtubeJson['kind'],
-      nextPageToken: youtubeJson['nextPageToken'],
-      etag: youtubeJson['etag'],
-    );
+    return VideoResponse(pageInfo: pageInfo, items: items, regionCode: youtubeJson['regionCode'], kind: youtubeJson['kind'], nextPageToken: youtubeJson['nextPageToken'], etag: youtubeJson['etag'],);
   }
 }
 
@@ -37,9 +24,7 @@ class PageInfo {
   PageInfo({this.totalResults, this.resultsPerPage});
 
   factory PageInfo.fromJson(Map<String, dynamic> json) {
-    return PageInfo(
-        totalResults: json['totalResults'],
-        resultsPerPage: json['resultsPerPage']);
+    return PageInfo(totalResults: json['totalResults'], resultsPerPage: json['resultsPerPage']);
   }
 }
 
@@ -55,8 +40,7 @@ class ItemsItem {
     Snippet snippet = Snippet.fromJson(json['snippet']);
     Id id = Id.fromJson(json['id']);
 
-    return ItemsItem(
-        snippet: snippet, id: id, kind: json['kind'], etag: json['etag']);
+    return ItemsItem(snippet: snippet, id: id, kind: json['kind'], etag: json['etag']);
   }
 }
 
@@ -92,14 +76,7 @@ class Snippet {
   factory Snippet.fromJson(Map<String, dynamic> json) {
     Thumbnails thumbnails = Thumbnails.fromJson(json['thumbnails']);
 
-    return Snippet(
-        thumbnails: thumbnails,
-        publishedAt: json['publishedAt'],
-        description: json['description'],
-        title: json['title'],
-        channelId: json['channelId'],
-        channelTitle: json['channelTitle'],
-        liveBroadcastContent: json['liveBroadcastContent']);
+    return Snippet(thumbnails: thumbnails, publishedAt: json['publishedAt'], description: json['description'], title: json['title'], channelId: json['channelId'], channelTitle: json['channelTitle'], liveBroadcastContent: json['liveBroadcastContent']);
   }
 }
 
@@ -115,11 +92,7 @@ class Thumbnails {
     ThumbnailDetail m = ThumbnailDetail.fromJson(json['medium']);
     ThumbnailDetail h = ThumbnailDetail.fromJson(json['high']);
 
-    return Thumbnails(
-      thumbnailDefault: d,
-      medium: m,
-      high: h
-    );
+    return Thumbnails(thumbnailDefault: d, medium: m, high: h);
   }
 }
 
@@ -131,7 +104,6 @@ class ThumbnailDetail {
   ThumbnailDetail({this.width, this.url, this.height});
 
   factory ThumbnailDetail.fromJson(Map<String, dynamic> json) {
-    return ThumbnailDetail(
-        width: json['width'], url: json['url'], height: json['height']);
+    return ThumbnailDetail(width: json['width'], url: json['url'], height: json['height']);
   }
 }
